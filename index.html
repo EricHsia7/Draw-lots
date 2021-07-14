@@ -358,14 +358,179 @@ $('.addli').click(function() {
 
 $('.next_1').click(function() {
   var lik = '';
+   var likjso = '' ;
   for (var i = 0; i < $('.list li').length; i++) {
-lik += '[:;,aa]' + $('.list li').eq(i).text() 
+lik += '[:;,aa]' + $('.list li').eq(i).text()
+     likjso += ',{"type": "text","text": "' + $('.list li').eq(i).text() + '","color": "#aaaaaa","size": "sm"}' ;
   }
   lik = lik.substring(7,lik.length)
   lik = lik.split('[:;,aa]') ;
+   likjso = likjso.substring(1,likjso.length) ;
   console.log(lik)
   $('.rrd').fadeIn(222);
   $('#result').text(lik[Math.floor(Math.random() * lik.length)]);
+   
+   
+   liff.sendMessages([
+
+  {
+
+  "type": "flex",
+
+  "altText":name + "已開始抽籤",
+
+  "contents": 
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "抽籤",
+        "weight": "bold",
+        "size": "xl"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "margin": "lg",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "text": "建立者",
+                "color": "#aaaaaa",
+                "size": "sm",
+                "flex": 2
+              },
+              {
+                "type": "text",
+                "text": name,
+                "wrap": true,
+                "color": "#666666",
+                "size": "sm",
+                "flex": 5
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "text": "狀態",
+                "color": "#aaaaaa",
+                "size": "sm",
+                "flex": 2
+              },
+              {
+                "type": "text",
+                "text": "抽籤中",
+                "wrap": true,
+                "color": "#666666",
+                "size": "sm",
+                "flex": 5
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "color": "#aaaaaa",
+                "size": "sm",
+                "flex": 2,
+                "text": "建立時間"
+              },
+              {
+                "type": "text",
+                "text": "--",
+                "wrap": true,
+                "color": "#666666",
+                "size": "sm",
+                "flex": 5
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "baseline",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "text",
+                "text": "ID",
+                "color": "#aaaaaa",
+                "size": "sm",
+                "flex": 2
+              },
+              {
+                "type": "text",
+                "text": loid,
+                "wrap": true,
+                "color": "#666666",
+                "size": "sm",
+                "flex": 5
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "項目",
+                "size": "xl",
+                "weight": "bold"
+              },
+              {
+                "type": "box",
+                "layout": "vertical",
+                "contents": 
+                  JSON.parse('[' + likjso + ']')
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+}
+])
+
+  .then(() => {
+
+    console.log('message sent');
+
+     //liff.closeWindow();
+
+  })
+
+  .catch((err) => {
+
+    console.log('error', err);
+
+     //liff.closeWindow();
+
+  });
+   
+   
+   
+   
 });
      //ghend
 })
