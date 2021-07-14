@@ -8,6 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
 <style>
    .list {
   list-style:none;
@@ -335,7 +337,37 @@ liff.init({
   });
    
    });
-  //shend    
+  //shend
+     //gh
+     $('li').click(function(e) {
+  var posx = e.pageX - $(this).offset().left ;
+  if(posx > ($(this).width()-50)) {
+    $(this).remove()
+  }
+});
+$('li')
+$('.addli').click(function() {
+  $('.list').append('<li contenteditable></li>');
+  $('li').click(function(e) {
+  var posx = e.pageX - $(this).offset().left ;
+  if(posx > ($(this).width()-50)) {
+    $(this).remove();
+  }
+});
+});
+
+$('.next_1').click(function() {
+  var lik = '';
+  for (var i = 0; i < $('.list li').length; i++) {
+lik += '[:;,aa]' + $('.list li').eq(i).text() 
+  }
+  lik = lik.substring(7,lik.length)
+  lik = lik.split('[:;,aa]') ;
+  console.log(lik)
+  $('.rrd').fadeIn(222);
+  $('#result').text(lik[Math.floor(Math.random() * lik.length)]);
+});
+     //ghend
 })
 .catch((err) => {
   console.log('error', err);
