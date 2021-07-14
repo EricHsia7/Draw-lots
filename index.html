@@ -545,7 +545,8 @@ lik += '[:;,aa]' + $('.list li').eq(i).text()
   "altText":name + "的抽籤已結束",
 
   "contents": 
-{
+
+     {
   "type": "bubble",
   "body": {
     "type": "box",
@@ -685,7 +686,7 @@ lik += '[:;,aa]' + $('.list li').eq(i).text()
                   {
                     "type": "text",
                     "text": $('#result').text(),
-                    "color": "#666666",
+                    "color": "#aaaaaa",
                     "size": "sm"
                   }
                 ]
@@ -695,8 +696,23 @@ lik += '[:;,aa]' + $('.list li').eq(i).text()
         ]
       }
     ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "button",
+        "action": {
+          "type": "uri",
+          "label": "建立其他抽籤",
+          "uri": "http://linecorp.com/"
+        }
+      }
+    ]
   }
 }
+     
 }
 ])
 
