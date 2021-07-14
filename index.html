@@ -355,10 +355,11 @@ $('.addli').click(function() {
   }
 });
 });
-
+     
+var lik = '';
+var likjso = '' ;
 $('.next_1').click(function() {
-  var lik = '';
-   var likjso = '' ;
+  
   for (var i = 0; i < $('.list li').length; i++) {
 lik += '[:;,aa]' + $('.list li').eq(i).text()
      likjso += ',{"type": "text","text": "' + $('.list li').eq(i).text() + '","color": "#aaaaaa","size": "sm"}' ;
