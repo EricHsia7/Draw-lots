@@ -8,8 +8,133 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<div id="start">開始建立</div>
+<style>
+   .list {
+  list-style:none;
+}
+.list li {
+  height:35px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border-bottom:1px #e3e3e3 solid;
+  position:relative;
+}
+.list li::after {
+  content:'\f00d';
+  font-family: "Font Awesome 5 Free";
+  color:#aaaaaa;
+  position:absolute;
+  top:9px;
+  right:5px
+}
 
+.addli {
+  width:100%;
+  height:35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom:100px
+}
+
+
+
+
+  .sendbar * {
+    -webkit-user-select: none;
+  }
+.sendbar {
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  width:100%;
+  height:60px;
+  background:#fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:row;
+  border-top:1px #e3e3e3 solid;
+}
+.sbtn {
+  width:calc(100% - 5px);
+    max-width:350px;
+  height:45px;
+  border-radius:12px;
+  background:#aaa;
+  color:#fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight:700;
+}
+  #sharejson ,#geturl{
+    width:calc(100% - 5px);
+    max-width:350px;
+  }
+.ddr ,.rrd,.fgt {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:calc(100% - 10px);
+  padding:5px;
+  height:100%;
+  background:#fff;
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+.rrd ,.ddr{
+  display:none;
+}
+#result {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%)
+}
+h1 {
+  margin:0px;
+  padding:0px;
+}
+   .fg {
+      position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%)
+   }
+</style>
+<div class="fgt">
+<div class="sbtn fg" id="start">開始建立</div>
+</div>
+
+<div class="ddr">
+<h1>建立抽籤</h1>
+
+<div class="list">
+  <li contenteditable>項目1</li>
+</div>
+<div class="addli">
+  <i class="fas fa-plus"></i>新增項目
+</div>
+
+
+<div class="sendbar">
+  <div class="sbtn next_1">開始抽籤</div>
+</div>
+</div>
+
+
+
+<div class="rrd">
+  <h1>抽籤結果</h1>
+  <h2 id="result">結果</h2>
+  
+  <div class="sendbar">
+  <div class="sbtn next_1">傳送結果</div>
+</div>
+</div>
 
 <script>
    var getUrlString = location.href;
@@ -81,6 +206,7 @@ liff.init({
     var loid = genid('random') ;
   //share
      $('#start').click(function() {
+        $('.ddr').fadeIn(222);
   liff.sendMessages([
   {
   "type": "flex",
