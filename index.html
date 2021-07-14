@@ -102,9 +102,20 @@ liff.init({
 .then(profile => {
   const name = profile.displayName ;
     //sh
-    
-    
- 
+    liff.sendMessages([
+  {
+    type: 'text',
+    text: name + '已開始建立抽籤。'
+  }
+])
+  .then(() => {
+    console.log('message sent');
+     liff.closeWindow();
+  })
+  .catch((err) => {
+    console.log('error', err);
+     liff.closeWindow();
+  });
   //shend    
 })
 .catch((err) => {
