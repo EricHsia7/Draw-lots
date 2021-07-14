@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-
+<div id="start">開始建立</div>
 
 
 <script>
@@ -80,6 +80,7 @@ liff.init({
   const name = profile.displayName ;
     
   //share
+     $('#start').click(function() {
   liff.sendMessages([
   {
   "type": "flex",
@@ -219,6 +220,8 @@ liff.init({
     console.log('error', err);
      //liff.closeWindow();
   });
+   
+   });
   //shend    
 })
 .catch((err) => {
