@@ -362,7 +362,7 @@ $('.next_1').click(function() {
   
   for (var i = 0; i < $('.list li').length; i++) {
 lik += '[:;,aa]' + $('.list li').eq(i).text()
-     likjso += ',{"type": "text","text": "' + $('.list li').eq(i).text() + '","color": "#aaaaaa","size": "sm"}' ;
+     likjso += ',{"type": "text","text": "' + $('.list li').eq(i).text() + '","color": "#666666","size": "sm"}' ;
   }
   lik = lik.substring(7,lik.length)
   lik = lik.split('[:;,aa]') ;
@@ -685,7 +685,7 @@ lik += '[:;,aa]' + $('.list li').eq(i).text()
                   {
                     "type": "text",
                     "text": $('#result').text(),
-                    "color": "#aaaaaa",
+                    "color": "#666666",
                     "size": "sm"
                   }
                 ]
