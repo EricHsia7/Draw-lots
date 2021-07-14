@@ -78,7 +78,7 @@ liff.init({
   liff.getProfile()
 .then(profile => {
   const name = profile.displayName ;
-    
+    var loid = genid('random') ;
   //share
      $('#start').click(function() {
   liff.sendMessages([
@@ -184,7 +184,7 @@ liff.init({
               },
               {
                 "type": "text",
-                "text": genid('random'),
+                "text": loid,
                 "wrap": true,
                 "color": "#666666",
                 "size": "sm",
