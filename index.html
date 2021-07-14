@@ -14,21 +14,7 @@
 <script>
    var getUrlString = location.href;
 var url = new URL(getUrlString);
-var co = url.searchParams.get('c') ;
-  function setcookie(cookiename,cookievalue) {
-document.cookie = cookiename + '=' + cookievalue + '; max-age='+60*60*24*30;
-}
-function getCookie(cname)
-{
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for(var i=0; i<ca.length; i++) 
-  {
-    var c = ca[i].trim();
-    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-  }
-  return "";
-}
+//var texts = url.searchParams.get('t') ;
 function genid(mode) {
 if(mode === "random"){
 var genidchars = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -73,9 +59,6 @@ genid5 += '-' + genid4 ;
   }
 
 }
-
-  
-
 liff.init({
     liffId: "1656214165-JPk2V1O2" // Use own liffId
   })
@@ -85,24 +68,19 @@ liff.init({
   if (!liff.isLoggedIn()) {
   liff.login({ redirectUri: "https://erichsia7.github.io/Draw-lots/" });
 }
-  //checkfriend
-   liff.getFriendship().then(data => {
-  if (data.friendFlag) {
-    $('.fri').fadeOut('222')
-  }
-      else {
-        $('.fri').append('<p>您必須先加入好友，才能使用這項功能。</p><div class="friaddbtn">加入好友</div>').css({'flex-direction':'column'});
-        $('.friaddbtn').attr("ripple-onclick","location.href = 'https://line.me/R/ti/p/%40663xflop';");
-        ripple('.friaddbtn','#fff','0.3',888,'true');
-      }
-     });
+   const accessToken = liff.getAccessToken();
+ 
+
+   
+   
   //getname
   
   liff.getProfile()
 .then(profile => {
   const name = profile.displayName ;
-    //sh
-    liff.sendMessages([
+    
+  //share
+  liff.sendMessages([
   {
     type: 'text',
     text: name + '已開始建立抽籤。'
@@ -120,12 +98,15 @@ liff.init({
 })
 .catch((err) => {
   console.log('error', err);
+     liff.closeWindow();
 });
   })
   .catch((err) => {
     // Error happens during initialization
     console.log(err.code, err.message);
+   liff.closeWindow();
   });
-  
-  
+   $(document).ready(function() {
+   
+      });
 </script>
