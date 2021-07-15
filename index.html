@@ -145,7 +145,10 @@ h2 {
 <script>
    var getUrlString = location.href;
 var url = new URL(getUrlString);
-//var texts = url.searchParams.get('t') ;
+var liff = url.searchParams.get('liff') ;
+   if(liff === 'true') {
+      $('.ddr h3,.rrd h3').fadeOut(1);
+   }
 function genid(mode) {
 if(mode === "random"){
 var genidchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
