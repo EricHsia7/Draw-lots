@@ -116,7 +116,7 @@ h2 {
 </div>
 
 <div class="ddr">
-<h2>建立抽籤</h2>
+<h3>建立抽籤</h3>
 
 <div class="list">
   <li contenteditable>項目1</li>
@@ -134,8 +134,8 @@ h2 {
 
 
 <div class="rrd">
-  <h2>抽籤結果</h2>
-  <h3 id="result">結果</h3>
+  <h3>抽籤結果</h3>
+  <h2 id="result">結果</h2>
   
   <div class="sendbar">
   <div class="sbtn next_2">傳送結果</div>
@@ -212,6 +212,7 @@ liff.init({
     var loid = genid('random') ;
   //share
      $('#start').click(function() {
+        $('title').html('建立抽籤');
         $('.ddr').fadeIn(222);
   liff.sendMessages([
   {
@@ -363,7 +364,7 @@ $('.addli').click(function() {
 var lik = '';
 var likjso = '' ;
 $('.next_1').click(function() {
-  
+  $('title').html('抽籤結果');
   for (var i = 0; i < $('.list li').length; i++) {
 lik += '[:;,aa]' + $('.list li').eq(i).text()
      likjso += ',{"type": "text","text": "' + $('.list li').eq(i).text() + '","color": "#666666","size": "sm"}' ;
