@@ -94,12 +94,15 @@
   height:130px;
   -webkit-user-select:none;
    }
-   .fgt span {
+   .fgt .fgtce {
      -webkit-user-select:none;
       position:absolute;
   top:50%;
   left:50%;
-  transform:translate(-50%,-50%)
+  transform:translate(-50%,-50%);
+display: flex;
+  justify-content: center;
+  align-items: center;
    }
    .fgt p {
       color:#888;
@@ -126,10 +129,10 @@ h3 {
    }
 </style>
 <div class="fgt">
-   <span>
+   <div class="fgtce">
       <img src="https://erichsia7.github.io/Draw-lots/D42F01EC-A9CF-4381-B8D0-31377AB8645B.png">
       <p>按下開始建立後即可建立抽籤。</p>
-   </span>
+   </div>
    <div class="sendbar">
 <div class="sbtn fg" id="start">開始建立</div>
    </div>
