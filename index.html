@@ -784,19 +784,19 @@ lik += '[:;,aa]' + $('.list li').eq(i).text()
       });
 </script>
 <script>
-   const injectScript = () => {
-  const script = document.createElement('script');
-  script.src = "https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js";
-  document.getElementsByTagName('head')[0].appendChild(script);
+   //const injectScript = () => {
+  //const script = document.createElement('script');
+  //script.src = "https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js";
+  //document.getElementsByTagName('head')[0].appendChild(script);
 
-  setTimeout(() => {
+  //setTimeout(() => {
     // hacky way to wait for script load
-    const script2 = document.createElement('script');
-    script2.text = 'window.vConsole = new VConsole();';
-    document.body.appendChild(script2);
-  }, 1000);
+    //const script2 = document.createElement('script');
+    //script2.text = 'window.vConsole = new VConsole();';
+    //document.body.appendChild(script2);
+  //}, 1000);
   
-};
-        const result = injectScript();
+//};
+        //const result = injectScript();
         
 </script>
