@@ -179,7 +179,7 @@ function genid(mode) {
 if(mode === "random"){
 var genidchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             var genid = "";
-            for (var i = 0; i < 16; i++) {
+            for (var i = 0; i < 8; i++) {
                 var genrandomNumber = Math.floor(Math.random() * genidchars.length);
                 genid += genidchars.substring(genrandomNumber, genrandomNumber + 1);
             }
