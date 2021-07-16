@@ -396,7 +396,7 @@ liff.init({
 $('li')
 $('.addli').click(function() {
   $('.list').append('<li contenteditable></li>');
-  $('li').eq($('li').length).click();
+  //$('li').eq($('li').length).click();
   $('li').click(function(e) {
   var posx = e.pageX - $(this).offset().left ;
   if(posx > ($(this).width()-50)) {
