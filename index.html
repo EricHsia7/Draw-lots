@@ -329,6 +329,14 @@ liff.init({
          dratime = Today.getFullYear() + '.' + (Today.getMonth()+1) + '.' + Today.getDate() + ' ' + Today.getHours() + ':' + Today.getMinutes() ;
         $('title').html('建立抽籤');
         $('.ddr').fadeIn(222);
+         gtag('event', 'create', {
+    'event_category': 'create',
+    'event_label':profile.userId,
+    'transport_type': 'beacon',
+    'event_callback': function(){
+   
+    }
+  });
   liff.sendMessages([
   {
   "type": "flex",
@@ -665,6 +673,13 @@ lik += '[:;,aa]' + $('.list li').eq(i).text()
      //ghend
      //ghy
      $('.next_2').click(function() {
+       gtag('event', 'Send_result', {
+    'event_category': 'Send_result',
+    'event_label':profile.userId,
+    'transport_type': 'beacon',
+    'event_callback': function(){
+   
+    
      liff.sendMessages([
 
   {
@@ -861,7 +876,10 @@ lik += '[:;,aa]' + $('.list li').eq(i).text()
      //liff.closeWindow();
 
   });
-        
+      //ga
+        }
+  });
+       //gaend
      });
      //ghyend
      
