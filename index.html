@@ -243,7 +243,19 @@ liff.init({
   liff.login({ redirectUri: "https://erichsia7.github.io/Draw-lots/" });
 }
    const accessToken = liff.getAccessToken();
- 
+  //checkfriend
+ liff.getFriendship().then(data => {
+  if (data.friendFlag) {
+  
+  }
+      else {
+        $('.fgtce p').html('您必須先加入好友，才能使用這項功能。');
+        $('#start').attr('id','addfri');
+        $('#addfri').click(function() {
+          location.href = 'https://line.me/R/ti/p/%40177dsovt';
+        });
+      }
+     });
 
    
    
