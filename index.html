@@ -147,7 +147,7 @@ h3 {
   #start {
 transition:0.3s;
   }
-  #start[yu="0"] {
+  #start[yu="0"] ,#start[yu="3"]{
 opacity:1;
   }
     #start[yu="1"] {
@@ -259,7 +259,7 @@ liff.init({
   }
       else {
         $('.fgtce p').html('您必須先加入好友，才能使用這項功能。');
-        $('#start').html('加入好友').attr('id','addfri');
+        $('#start').html('加入好友').attr('yu','3').attr('id','addfri');
         $('#addfri').click(function() {
           location.href = 'https://line.me/R/ti/p/%40177dsovt';
         });
