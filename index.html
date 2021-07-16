@@ -319,6 +319,38 @@ liff.init({
       }
      });
     //ga-friendend
+    //gaos
+    gtag('event', 'User_OS', {
+    'event_category': liff.getOS(),
+    'event_label':profile.userId,
+    'transport_type': 'beacon',
+    'event_callback': function(){
+   
+    }
+  });
+    //gaosend
+    //galang
+    gtag('event', 'User_Lang', {
+    'event_category': liff.getLanguage(),
+    'event_label':profile.userId,
+    'transport_type': 'beacon',
+    'event_callback': function(){
+   
+    }
+  });
+    //galangend
+    //galinever
+    gtag('event', 'User_LINE_Ver', {
+    'event_category': liff.getLineVersion(),
+    'event_label':profile.userId,
+    'transport_type': 'beacon',
+    'event_callback': function(){
+   
+    }
+  });
+    //galineverend
+    
+    
     //gaend
   //share
     var dratime = '' ;
