@@ -389,7 +389,7 @@ liff.init({
      //gh
      $('li').click(function(e) {
   var posx = e.pageX - $(this).offset().left ;
-  if(posx > ($(this).width()-50)) {
+  if(posx > ($(this).width()-25)) {
     $(this).remove()
   }
 });
@@ -399,7 +399,7 @@ $('.addli').click(function() {
   //$('li').eq($('li').length).click();
   $('li').click(function(e) {
   var posx = e.pageX - $(this).offset().left ;
-  if(posx > ($(this).width()-50)) {
+  if(posx > ($(this).width()-25)) {
     $(this).remove();
   }
 });
