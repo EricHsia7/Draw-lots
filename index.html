@@ -255,7 +255,7 @@ liff.init({
   //checkfriend
  liff.getFriendship().then(data => {
   if (data.friendFlag) {
-  $('#start').atttr('yu','0')
+  $('#start').attr('yu','0')
   }
       else {
         $('.fgtce p').html('您必須先加入好友，才能使用這項功能。');
