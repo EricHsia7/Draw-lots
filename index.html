@@ -144,6 +144,15 @@ h3 {
   transform:translate(-50%,-50%);
      -webkit-user-select: none;
    }
+  #start {
+transition:0.3s;
+  }
+  #start[yu="0"] {
+opacity:1;
+  }
+    #start[yu="1"] {
+opacity:0.5;
+  }
 </style>
 <div class="fgt">
    <div class="fgtce">
@@ -151,7 +160,7 @@ h3 {
       <p>按下開始建立後即可建立抽籤。</p>
    </div>
    <div class="sendbar">
-<div class="sbtn fg" id="start">開始建立</div>
+<div class="sbtn fg" id="start" yu="1">開始建立</div>
    </div>
 </div>
 
@@ -246,7 +255,7 @@ liff.init({
   //checkfriend
  liff.getFriendship().then(data => {
   if (data.friendFlag) {
-  
+  $('#start').atttr('yu','0')
   }
       else {
         $('.fgtce p').html('您必須先加入好友，才能使用這項功能。');
@@ -267,6 +276,7 @@ liff.init({
     var loid = genid('random') ;
   //share
      $('#start').click(function() {
+       if($('#start').attr('yu') === '0') {
         $('title').html('建立抽籤');
         $('.ddr').fadeIn(222);
   liff.sendMessages([
@@ -395,7 +405,7 @@ liff.init({
     console.log('error', err);
      //liff.closeWindow();
   });
-   
+       }
    });
   //shend
      //gh
