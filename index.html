@@ -321,8 +321,12 @@ liff.init({
     //ga-friendend
     //gaend
   //share
+    var dratime = '' ;
+    var Today=new Date();
      $('#start').click(function() {
        if($('#start').attr('yu') === '0') {
+         Today=new Date();
+         dratime = Today.getFullYear() + '.' + (Today.getMonth()+1) + '.' + Today.getDate() + ' ' + Today.getHours() + ':' + Today.getMinutes() ;
         $('title').html('建立抽籤');
         $('.ddr').fadeIn(222);
   liff.sendMessages([
@@ -406,7 +410,7 @@ liff.init({
               },
               {
                 "type": "text",
-                "text": "--",
+                "text": dratime,
                 "wrap": true,
                 "color": "#666666",
                 "size": "sm",
@@ -582,7 +586,7 @@ lik += '[:;,aa]' + $('.list li').eq(i).text()
               },
               {
                 "type": "text",
-                "text": "--",
+                "text": dratime,
                 "wrap": true,
                 "color": "#666666",
                 "size": "sm",
@@ -747,7 +751,7 @@ lik += '[:;,aa]' + $('.list li').eq(i).text()
               },
               {
                 "type": "text",
-                "text": "--",
+                "text": dratime,
                 "wrap": true,
                 "color": "#666666",
                 "size": "sm",
