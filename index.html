@@ -109,6 +109,11 @@
       font-size: 22px;
     }
 
+    .addli svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .sendbar * {
       -webkit-user-select: none;
       user-select: none;
@@ -260,7 +265,16 @@
   <h3>建立抽籤</h3>
   <div class="list">
   </div>
-  <div class="addli">新增項目</div>
+  <div class="addli">
+    <svg stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;"
+      version="1.1" viewBox="0 0 64 64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path
+        d="M28.5714 64L28.5714 35.4286L1.42109e-14 35.4286L1.42109e-14 28.5714L28.5714 28.5714L28.5714 7.10543e-15L35.4286 7.10543e-15L35.4286 28.5714L64 28.5714L64 35.4286L35.4286 35.4286L35.4286 64L28.5714 64Z"
+        fill="var(--r-000000)" fill-rule="evenodd" opacity="1" stroke="none" />
+    </svg>
+    新增項目
+  </div>
   <div class="sendbar">
     <div class="sbtn next_1">開始抽籤</div>
   </div>
@@ -280,7 +294,7 @@
   var liffu = url.searchParams.get("liff");
   var result = ''
   if (liffu === "true") {
-    $("h3").css({'display':'none'})
+    $("h3").css({ 'display': 'none' })
   }
   let delete_icon = '<svg stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 64 64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M4.92308 64L0 59.0769L27.0769 32L1.11786e-06 4.92308L4.92308-5.5893e-07L32 27.0769L59.0769-1.67679e-06L64 4.92307L36.9231 32L64 59.0769L59.0769 64L32 36.9231L4.92308 64Z" fill="var(--r-000000)" fill-rule="evenodd" opacity="1" stroke="none"/></svg>'
   function genid(mode) {
@@ -395,7 +409,7 @@
               Today = new Date();
               dratime = Today.getFullYear() + "." + (Today.getMonth() + 1) + "." + Today.getDate() + " " + Today.getHours() + ":" + Today.getMinutes();
               $("title").html("建立抽籤");
-              $(".ddr").css({'display':'block','opacity':'1'})
+              $(".ddr").css({ 'display': 'block', 'opacity': '1' })
               gtag("event", "create", {
                 event_category: "create",
                 event_label: profile.userId,
@@ -552,7 +566,7 @@
                 size: 'sm'
               })
             }
-            $(".rrd").css({'display':'block','opacity':'1'})
+            $(".rrd").css({ 'display': 'block', 'opacity': '1' })
             result = String(d_list[Math.floor(Math.random() * d_list.length)])
             $("#result").text(result)
             liff.sendMessages([
