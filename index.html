@@ -559,6 +559,7 @@
             $("title").html("抽籤結果");
             for (var i = 0; i < $(".list li").length; i++) {
               var this_list_text = $('.list li input[type="text"]').eq(i).val()
+              console.log(this_list_text)
               if (this_list_text === null || this_list_text === undefined) {
                 this_list_text = '--'
               }
