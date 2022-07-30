@@ -1,967 +1,963 @@
-
-<meta charset="UTF-8">
-<title>抽籤</title>
 <head f="ga">
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NYWXHF11W2"></script>
-<script>
+ <meta charset="UTF-8" />
+ <title>抽籤</title>
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-NYWXHF11W2"></script>
+ <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  function gtag() {
+   dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-NYWXHF11W2");
+ </script>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+ <link type="image/x-icon" href="pwaicon/512x512.ico" rel="icon" />
+ <link type="image/x-icon" href="pwaicon/512x512.ico" rel="bookmark" />
+ <link type="image/x-icon" href="pwaicon/512x512.ico" rel="shortcut icon" />
+ <link href="pwaicon/512x512.png" sizes="512x512" rel="apple-touch-icon-precomposed" />
+ <meta name="apple-mobile-web-app-capable" content="yes" />
+ <meta name="apple-mobile-web-app-status-bar-style" content="defualt" />
+ <link rel="manifest" href="manifest.json" />
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
-  gtag('config', 'G-NYWXHF11W2');
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<link type="image/x-icon" href="pwaicon/512x512.ico" rel="icon" />
-<link type="image/x-icon" href="pwaicon/512x512.ico" rel="bookmark" />
-<link type="image/x-icon" href="pwaicon/512x512.ico" rel="shortcut icon" />
-<link href="pwaicon/512x512.png" sizes="512x512" rel="apple-touch-icon-precomposed" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="defualt" />
-<link rel="manifest" href="manifest.json">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+ <style>
+  * {
+   outline: none;
+   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
 
-<style>
-   * {outline:none; -webkit-tap-highlight-color:rgba(0,0,0,0);}
-   .list {
-  list-style:none;
-}
-.list li {
-  height:35px;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  border-bottom:1px rgba(170, 200, 193,0.5) solid;
-  position:relative;
-  color:rgba(170, 200, 193,1);
-  font-family: 'Noto Sans TC', sans-serif;
-}
-.list li::after {
-  content:'\f00d';
-  font-family: "Font Awesome 5 Free";
-  color:rgba(170, 200, 193,1);
-  position:absolute;
-  top:9px;
-  right:5px;
-  -webkit-user-select: none;
-  user-select: none;
-}
+  .list {
+   list-style: none;
+  }
 
-.addli {
-  width:100%;
-  height:35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom:100px;
-  color:rgba(170, 200, 193,1);
-  font-family: 'Noto Sans TC', sans-serif;
-  font-weight:700;
-  -webkit-user-select: none;
-  user-select: none;
-}
+  .list li {
+   height: 35px;
+   display: flex;
+   justify-content: left;
+   align-items: center;
+   border-bottom: 1px rgba(170, 200, 193, 0.5) solid;
+   position: relative;
+   color: rgba(170, 200, 193, 1);
+   font-family: "Noto Sans TC", sans-serif;
+  }
 
+  .list li::after {
+   content: "\f00d";
+   font-family: "Font Awesome 5 Free";
+   color: rgba(170, 200, 193, 1);
+   position: absolute;
+   top: 9px;
+   right: 5px;
+   -webkit-user-select: none;
+   user-select: none;
+  }
 
-
+  .addli {
+   width: 100%;
+   height: 35px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 100px;
+   color: rgba(170, 200, 193, 1);
+   font-family: "Noto Sans TC", sans-serif;
+   font-weight: 700;
+   -webkit-user-select: none;
+   user-select: none;
+  }
 
   .sendbar * {
-    -webkit-user-select: none;
-    user-select: none;
+   -webkit-user-select: none;
+   user-select: none;
   }
-.sendbar {
-  position:fixed;
-  left:0px;
-  bottom:0px;
-  width:100%;
-  height:60px;
-  background:#fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction:row;
-  border-top:1px rgba(170, 200, 193,0.5) solid;
-}
-.sbtn {
-  width:calc(100% - 5px);
-    max-width:350px;
-  height:45px;
-  border-radius:12px;
-  background:#aac8c1;
-  color:#fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-weight:700;
-}
-  #sharejson ,#geturl{
-    width:calc(100% - 5px);
-    max-width:350px;
-  }
-.ddr ,.rrd,.fgt {
-  position:fixed;
-  top:0px;
-  left:0px;
-  width:calc(100% - 10px);
-  padding:5px;
-  height:100%;
-  background:#fff;
-  overflow-y:scroll;
-  overflow-x:hidden;
-}
-.rrd ,.ddr{
-  display:none;
-}
-   .fgt img {
-   width:130px;
-  height:130px;
-  -webkit-user-select:none;
-  user-select: none;
-   }
-   .fgt .fgtce {
-     -webkit-user-select:none;
-     user-select: none;
-      position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-display: flex;
-  justify-content: center;
-  align-items: center;
-      flex-direction:column;
-   }
-   .fgt p {
-      color:#aac8c1;
-        -webkit-user-select:none;
-        user-select: none;
-      font-family: 'Noto Sans TC', sans-serif;
-   }
-#result {
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-family: 'Noto Sans TC', sans-serif;
-  font-weight:700;
-  color:#aac8c1;
-  -webkit-user-select: none;
-  user-select: none;
-}
-h3 {
-  margin:0px;
-  padding:0px;
+
+  .sendbar {
+   position: fixed;
+   left: 0px;
+   bottom: 0px;
+   width: 100%;
+   height: 60px;
+   background: #fff;
    display: flex;
-  justify-content: center;
-  align-items: center;
-  color:#aac8c1;
-    -webkit-user-select: none;
-    user-select: none;
-}
-   .fg {
-      position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-     -webkit-user-select: none;
-     user-select: none;
-   }
-  #start ,#addfri{
-transition:0.3s;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
+   border-top: 1px rgba(170, 200, 193, 0.5) solid;
   }
-  #start[yu="0"] ,#start[yu="3"],#addfri[yu="3"]{
-opacity:1;
+
+  .sbtn {
+   width: calc(100% - 5px);
+   max-width: 350px;
+   height: 45px;
+   border-radius: 12px;
+   background: #aac8c1;
+   color: #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-family: "Noto Sans TC", sans-serif;
+   font-weight: 700;
   }
-    #start[yu="1"],#addfri[yu="1"] {
-opacity:0.5;
+
+  #sharejson,
+  #geturl {
+   width: calc(100% - 5px);
+   max-width: 350px;
   }
-</style>
+
+  .ddr,
+  .rrd,
+  .fgt {
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   width: calc(100% - 10px);
+   padding: 5px;
+   height: 100%;
+   background: #fff;
+   overflow-y: scroll;
+   overflow-x: hidden;
+  }
+
+  .rrd,
+  .ddr {
+   display: none;
+  }
+
+  .fgt img {
+   width: 130px;
+   height: 130px;
+   -webkit-user-select: none;
+   user-select: none;
+  }
+
+  .fgt .fgtce {
+   -webkit-user-select: none;
+   user-select: none;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+  }
+
+  .fgt p {
+   color: #aac8c1;
+   -webkit-user-select: none;
+   user-select: none;
+   font-family: "Noto Sans TC", sans-serif;
+  }
+
+  #result {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-family: "Noto Sans TC", sans-serif;
+   font-weight: 700;
+   color: #aac8c1;
+   -webkit-user-select: none;
+   user-select: none;
+  }
+
+  h3 {
+   margin: 0px;
+   padding: 0px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #aac8c1;
+   -webkit-user-select: none;
+   user-select: none;
+  }
+
+  .fg {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   -webkit-user-select: none;
+   user-select: none;
+  }
+
+  #start,
+  #addfri {
+   transition: 0.3s;
+  }
+
+  #start[yu="0"],
+  #start[yu="3"],
+  #addfri[yu="3"] {
+   opacity: 1;
+  }
+
+  #start[yu="1"],
+  #addfri[yu="1"] {
+   opacity: 0.5;
+  }
+ </style>
 </head>
 
 <div class="fgt">
-   <div class="fgtce">
-      <img src="https://erichsia7.github.io/Draw-lots/F5499CB6-6352-47E7-9BFF-4373C15D2CDE.png">
-      <p>按下開始建立後即可建立抽籤。</p>
-   </div>
-   <div class="sendbar">
-<div class="sbtn fg" id="start" yu="1">開始建立</div>
-   </div>
+ <div class="fgtce">
+  <img src="https://erichsia7.github.io/Draw-lots/F5499CB6-6352-47E7-9BFF-4373C15D2CDE.png" />
+  <p>按下開始建立後即可建立抽籤。</p>
+ </div>
+ <div class="sendbar">
+  <div class="sbtn fg" id="start" yu="1">開始建立</div>
+ </div>
 </div>
 
 <div class="ddr">
-<h3>建立抽籤</h3>
+ <h3>建立抽籤</h3>
 
-<div class="list">
+ <div class="list">
   <li contenteditable>項目1</li>
-</div>
-<div class="addli">
-  <i class="fas fa-plus"></i>新增項目
-</div>
+ </div>
+ <div class="addli"><i class="fas fa-plus"></i>新增項目</div>
 
-
-<div class="sendbar">
+ <div class="sendbar">
   <div class="sbtn next_1">開始抽籤</div>
+ </div>
 </div>
-</div>
-
-
 
 <div class="rrd">
-  <h3>抽籤結果</h3>
-  <h2 id="result">結果</h2>
-  
-  <div class="sendbar">
+ <h3>抽籤結果</h3>
+ <h2 id="result">結果</h2>
+
+ <div class="sendbar">
   <div class="sbtn next_2">傳送結果</div>
-</div>
+ </div>
 </div>
 
 <script>
-   var getUrlString = location.href;
-var url = new URL(getUrlString);
-var liffu = url.searchParams.get('liff') ;
-   if(liffu === 'true') {
-      $('h3').fadeOut(1);
+ var getUrlString = location.href;
+ var url = new URL(getUrlString);
+ var liffu = url.searchParams.get("liff");
+ if (liffu === "true") {
+  $("h3").fadeOut(1);
+ }
+ function genid(mode) {
+  if (mode === "random") {
+   var genidchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+   var genid = "";
+   for (var i = 0; i < 8; i++) {
+    var genrandomNumber = Math.floor(Math.random() * genidchars.length);
+    genid += genidchars.substring(genrandomNumber, genrandomNumber + 1);
    }
-function genid(mode) {
-if(mode === "random"){
-var genidchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            var genid = "";
-            for (var i = 0; i < 8; i++) {
-                var genrandomNumber = Math.floor(Math.random() * genidchars.length);
-                genid += genidchars.substring(genrandomNumber, genrandomNumber + 1);
-            }
-  return genid ;
-}
-          
- if(mode === "time"){
-   var gtoday=new Date();
-   var genid2 = (gtoday.getMonth()+1) + '_' + gtoday.getDate() + '_' + gtoday.getHours() + '_' + gtoday.getMinutes() + '_' + gtoday.getSeconds() + '-' + (1+Math.floor(Math.random() * 8)) + '' + (1+Math.floor(Math.random() * 8)) + '' + (1+Math.floor(Math.random() * 8)) + '' + (1+Math.floor(Math.random() * 8)) + '' + (1+Math.floor(Math.random() * 8)) + '' + (1+Math.floor(Math.random() * 8)) + '' + (1+Math.floor(Math.random() * 8)) + '' + (1+Math.floor(Math.random() * 8));
-   
-   return genid2
- }
-  
-  if(mode === "number"){
-   
-   var genid3 = '' ;
-for (var i = 0; i < 16; i++) {
-  genid3 += '' + (0+Math.floor(Math.random() * 9))
-}
-   return genid3
- }
-  
-  if(mode === "uuid"){
-var genidchars4 = "abcdef012345678";
-    var geniduu = [8,4,4,4,12];
-            var genid4 = "";
-            var genid5 = "";
-    for (var ia = 0; ia < geniduu.length; ia++) {
-      var genid4 = "";
-            for (var i = 0; i < geniduu[ia]; i++) {
-                var genrandomNumber4 = Math.floor(Math.random() * genidchars4.length);
-                genid4 += genidchars4.substring(genrandomNumber4, genrandomNumber4 + 1);
-            }
-genid5 += '-' + genid4 ;
-    }
-    return genid5.substring(1,genid5.length)
+   return genid;
   }
 
-}
-liff.init({
-    liffId: "1656214165-JPk2V1O2" // Use own liffId
+  if (mode === "time") {
+   var gtoday = new Date();
+   var genid2 =
+    gtoday.getMonth() +
+    1 +
+    "_" +
+    gtoday.getDate() +
+    "_" +
+    gtoday.getHours() +
+    "_" +
+    gtoday.getMinutes() +
+    "_" +
+    gtoday.getSeconds() +
+    "-" +
+    (1 + Math.floor(Math.random() * 8)) +
+    "" +
+    (1 + Math.floor(Math.random() * 8)) +
+    "" +
+    (1 + Math.floor(Math.random() * 8)) +
+    "" +
+    (1 + Math.floor(Math.random() * 8)) +
+    "" +
+    (1 + Math.floor(Math.random() * 8)) +
+    "" +
+    (1 + Math.floor(Math.random() * 8)) +
+    "" +
+    (1 + Math.floor(Math.random() * 8)) +
+    "" +
+    (1 + Math.floor(Math.random() * 8));
+
+   return genid2;
+  }
+
+  if (mode === "number") {
+   var genid3 = "";
+   for (var i = 0; i < 16; i++) {
+    genid3 += "" + (0 + Math.floor(Math.random() * 9));
+   }
+   return genid3;
+  }
+
+  if (mode === "uuid") {
+   var genidchars4 = "abcdef012345678";
+   var geniduu = [8, 4, 4, 4, 12];
+   var genid4 = "";
+   var genid5 = "";
+   for (var ia = 0; ia < geniduu.length; ia++) {
+    var genid4 = "";
+    for (var i = 0; i < geniduu[ia]; i++) {
+     var genrandomNumber4 = Math.floor(Math.random() * genidchars4.length);
+     genid4 += genidchars4.substring(genrandomNumber4, genrandomNumber4 + 1);
+    }
+    genid5 += "-" + genid4;
+   }
+   return genid5.substring(1, genid5.length);
+  }
+ }
+ liff
+  .init({
+   liffId: "1656214165-JPk2V1O2", // Use own liffId
   })
   .then(() => {
-    // Start to use liff's api
-  //login
-  if (!liff.isLoggedIn()) {
-  liff.login({ redirectUri: "https://erichsia7.github.io/Draw-lots/" });
-}
+   // Start to use liff's api
+   //login
+   if (!liff.isLoggedIn()) {
+    liff.login({ redirectUri: "https://erichsia7.github.io/Draw-lots/" });
+   }
    const accessToken = liff.getAccessToken();
-  
-  //checkfriend
- liff.getFriendship().then(data => {
-  if (data.friendFlag) {
-  $('#start').attr('yu','0')
-  }
-      else {
-        $('.fgtce p').html('您必須先加入好友，才能使用這項功能。');
-        $('#start').html('加入好友').attr('yu','3').attr('id','addfri');
-        $('#addfri').click(function() {
-          location.href = 'https://line.me/R/ti/p/%40177dsovt';
-        });
-        
-      }
-     });
 
-   
-   
-  //getname
-  
-  liff.getProfile()
-.then(profile => {
-  const name = profile.displayName ;
-    var loid = genid('random') ;
-    //ga
-    gtag('event', 'logged_in', {
-    'event_category': 'logged_in',
-    'event_label':profile.userId,
-    'transport_type': 'beacon',
-    'event_callback': function(){
-   
-    }
-  });
-    
-    
-    //ga-friend 
-    liff.getFriendship().then(data => {
-  if (data.friendFlag) {
-    gtag('event', 'friendFlag', {
-    'event_category': 'true',
-    'event_label':profile.userId,
-    'transport_type': 'beacon',
-    'event_callback': function(){
-   
-    }
-  }); 
-  }
-  else {
-    gtag('event', 'friendFlag', {
-    'event_category': 'false',
-    'event_label':profile.userId,
-    'transport_type': 'beacon',
-    'event_callback': function(){
-   
-    }
-  }); 
-      }
+   //checkfriend
+   liff.getFriendship().then((data) => {
+    if (data.friendFlag) {
+     $("#start").attr("yu", "0");
+    } else {
+     $(".fgtce p").html("您必須先加入好友，才能使用這項功能。");
+     $("#start").html("加入好友").attr("yu", "3").attr("id", "addfri");
+     $("#addfri").click(function () {
+      location.href = "https://line.me/R/ti/p/%40177dsovt";
      });
-    //ga-friendend
-    //gaos
-    gtag('event', 'User_OS', {
-    'event_category': liff.getOS(),
-    'event_label':profile.userId,
-    'transport_type': 'beacon',
-    'event_callback': function(){
-   
     }
-  });
-    //gaosend
-    //galang
-    gtag('event', 'User_Lang', {
-    'event_category': liff.getLanguage(),
-    'event_label':profile.userId,
-    'transport_type': 'beacon',
-    'event_callback': function(){
-   
-    }
-  });
-    //galangend
-    //galinever
-    gtag('event', 'User_LINE_Ver', {
-    'event_category': liff.getLineVersion(),
-    'event_label':profile.userId,
-    'transport_type': 'beacon',
-    'event_callback': function(){
-   
-    }
-  });
-    //galineverend
-    
-    
-    //gaend
-  //share
-    var dratime = '' ;
-    var Today=new Date();
-     $('#start').click(function() {
-       if($('#start').attr('yu') === '0') {
-         Today=new Date();
-         dratime = Today.getFullYear() + '.' + (Today.getMonth()+1) + '.' + Today.getDate() + ' ' + Today.getHours() + ':' + Today.getMinutes() ;
-        $('title').html('建立抽籤');
-        $('.ddr').fadeIn(222);
-         gtag('event', 'create', {
-    'event_category': 'create',
-    'event_label':profile.userId,
-    'transport_type': 'beacon',
-    'event_callback': function(){
-   
-    }
-  });
-  liff.sendMessages([
-  {
-  "type": "flex",
-  "altText":name + "已開始建立抽籤",
-  "contents": 
-  {
-  "type": "bubble",
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "text",
-        "text": "抽籤",
-        "weight": "bold",
-        "size": "xl"
-      },
-      {
-        "type": "box",
-        "layout": "vertical",
-        "margin": "lg",
-        "spacing": "sm",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "建立者",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2
-              },
-              {
-                "type": "text",
-                "text": name,
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "狀態",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2
-              },
-              {
-                "type": "text",
-                "text": "建立中",
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2,
-                "text": "建立時間"
-              },
-              {
-                "type": "text",
-                "text": dratime,
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "ID",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2
-              },
-              {
-                "type": "text",
-                "text": loid,
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-}
-}
-])
-  .then(() => {
-    console.log('message sent');
-     //liff.closeWindow();
-  })
-  .catch((err) => {
-    console.log('error', err);
-     //liff.closeWindow();
-  });
-       }
    });
-  //shend
-     //gh
-     $('li').click(function(e) {
-  var posx = e.pageX - $(this).offset().left ;
-  if(posx > ($(this).width()-25)) {
-    $(this).remove()
-  }
-});
-$('li')
-$('.addli').click(function() {
-  $('.list').append('<li contenteditable></li>');
-  //$('li').eq($('li').length).click();
-  $('li').click(function(e) {
-  var posx = e.pageX - $(this).offset().left ;
-  if(posx > ($(this).width()-25)) {
-    $(this).remove();
-  }
-});
-});
-     
-var lik = '';
-var likjso = '' ;
-$('.next_1').click(function() {
-    gtag('event', 'Drawing_lots', {
-    'event_category': $('.list li').length,
-    'event_label':profile.userId,
-    'transport_type': 'beacon',
-    'event_callback': function(){
-   
-    }
-  });  
-  $('title').html('抽籤結果');
-  for (var i = 0; i < $('.list li').length; i++) {
-lik += '[:;,aa]' + $('.list li').eq(i).text()
-     likjso += ',{"type": "text","text": "' + $('.list li').eq(i).text() + '","color": "#666666","size": "sm"}' ;
-  }
-  lik = lik.substring(7,lik.length)
-  lik = lik.split('[:;,aa]') ;
-   likjso = likjso.substring(1,likjso.length) ;
-  console.log(lik)
-  $('.rrd').fadeIn(222);
-  $('#result').text(lik[Math.floor(Math.random() * lik.length)]);
-   
-   
-   liff.sendMessages([
 
-  {
+   //getname
 
-  "type": "flex",
+   liff
+    .getProfile()
+    .then((profile) => {
+     const name = profile.displayName;
+     var loid = genid("random");
+     //ga
+     gtag("event", "logged_in", {
+      event_category: "logged_in",
+      event_label: profile.userId,
+      transport_type: "beacon",
+      event_callback: function () { },
+     });
 
-  "altText":name + "已開始抽籤",
-
-  "contents": 
-{
-  "type": "bubble",
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "text",
-        "text": "抽籤",
-        "weight": "bold",
-        "size": "xl"
-      },
-      {
-        "type": "box",
-        "layout": "vertical",
-        "margin": "lg",
-        "spacing": "sm",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "建立者",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2
-              },
-              {
-                "type": "text",
-                "text": name,
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "狀態",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2
-              },
-              {
-                "type": "text",
-                "text": "抽籤中",
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2,
-                "text": "建立時間"
-              },
-              {
-                "type": "text",
-                "text": dratime,
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "ID",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2
-              },
-              {
-                "type": "text",
-                "text": loid,
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "項目",
-                "size": "xl",
-                "weight": "bold"
-              },
-              {
-                "type": "box",
-                "layout": "vertical",
-                "contents": 
-                  JSON.parse('[' + likjso + ']')
-              }
-            ]
-          }
-        ]
+     //ga-friend
+     liff.getFriendship().then((data) => {
+      if (data.friendFlag) {
+       gtag("event", "friendFlag", {
+        event_category: "true",
+        event_label: profile.userId,
+        transport_type: "beacon",
+        event_callback: function () { },
+       });
+      } else {
+       gtag("event", "friendFlag", {
+        event_category: "false",
+        event_label: profile.userId,
+        transport_type: "beacon",
+        event_callback: function () { },
+       });
       }
-    ]
-  }
-}
-}
-])
+     });
+     //ga-friendend
+     //gaos
+     gtag("event", "User_OS", {
+      event_category: liff.getOS(),
+      event_label: profile.userId,
+      transport_type: "beacon",
+      event_callback: function () { },
+     });
+     //gaosend
+     //galang
+     gtag("event", "User_Lang", {
+      event_category: liff.getLanguage(),
+      event_label: profile.userId,
+      transport_type: "beacon",
+      event_callback: function () { },
+     });
+     //galangend
+     //galinever
+     gtag("event", "User_LINE_Ver", {
+      event_category: liff.getLineVersion(),
+      event_label: profile.userId,
+      transport_type: "beacon",
+      event_callback: function () { },
+     });
+     //galineverend
 
-  .then(() => {
+     //gaend
+     //share
+     var dratime = "";
+     var Today = new Date();
+     $("#start").click(function () {
+      if ($("#start").attr("yu") === "0") {
+       Today = new Date();
+       dratime = Today.getFullYear() + "." + (Today.getMonth() + 1) + "." + Today.getDate() + " " + Today.getHours() + ":" + Today.getMinutes();
+       $("title").html("建立抽籤");
+       $(".ddr").fadeIn(222);
+       gtag("event", "create", {
+        event_category: "create",
+        event_label: profile.userId,
+        transport_type: "beacon",
+        event_callback: function () { },
+       });
+       liff
+        .sendMessages([
+         {
+          type: "flex",
+          altText: name + "已開始建立抽籤",
+          contents: {
+           type: "bubble",
+           body: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+             {
+              type: "text",
+              text: "抽籤",
+              weight: "bold",
+              size: "xl",
+             },
+             {
+              type: "box",
+              layout: "vertical",
+              margin: "lg",
+              spacing: "sm",
+              contents: [
+               {
+                type: "box",
+                layout: "baseline",
+                spacing: "sm",
+                contents: [
+                 {
+                  type: "text",
+                  text: "建立者",
+                  color: "#aaaaaa",
+                  size: "sm",
+                  flex: 2,
+                 },
+                 {
+                  type: "text",
+                  text: name,
+                  wrap: true,
+                  color: "#666666",
+                  size: "sm",
+                  flex: 5,
+                 },
+                ],
+               },
+               {
+                type: "box",
+                layout: "baseline",
+                spacing: "sm",
+                contents: [
+                 {
+                  type: "text",
+                  text: "狀態",
+                  color: "#aaaaaa",
+                  size: "sm",
+                  flex: 2,
+                 },
+                 {
+                  type: "text",
+                  text: "建立中",
+                  wrap: true,
+                  color: "#666666",
+                  size: "sm",
+                  flex: 5,
+                 },
+                ],
+               },
+               {
+                type: "box",
+                layout: "baseline",
+                spacing: "sm",
+                contents: [
+                 {
+                  type: "text",
+                  color: "#aaaaaa",
+                  size: "sm",
+                  flex: 2,
+                  text: "建立時間",
+                 },
+                 {
+                  type: "text",
+                  text: dratime,
+                  wrap: true,
+                  color: "#666666",
+                  size: "sm",
+                  flex: 5,
+                 },
+                ],
+               },
+               {
+                type: "box",
+                layout: "baseline",
+                spacing: "sm",
+                contents: [
+                 {
+                  type: "text",
+                  text: "ID",
+                  color: "#aaaaaa",
+                  size: "sm",
+                  flex: 2,
+                 },
+                 {
+                  type: "text",
+                  text: loid,
+                  wrap: true,
+                  color: "#666666",
+                  size: "sm",
+                  flex: 5,
+                 },
+                ],
+               },
+              ],
+             },
+            ],
+           },
+          },
+         },
+        ])
+        .then(() => {
+         console.log("message sent");
+         //liff.closeWindow();
+        })
+        .catch((err) => {
+         console.log("error", err);
+         //liff.closeWindow();
+        });
+      }
+     });
+     //shend
+     //gh
+     $("li").click(function (e) {
+      var posx = e.pageX - $(this).offset().left;
+      if (posx > $(this).width() - 25) {
+       $(this).remove();
+      }
+     });
+     $("li");
+     $(".addli").click(function () {
+      $(".list").append("<li contenteditable></li>");
+      //$('li').eq($('li').length).click();
+      $("li").click(function (e) {
+       var posx = e.pageX - $(this).offset().left;
+       if (posx > $(this).width() - 25) {
+        $(this).remove();
+       }
+      });
+     });
 
-    console.log('message sent');
+     var lik = "";
+     var likjso = "";
+     $(".next_1").click(function () {
+      gtag("event", "Drawing_lots", {
+       event_category: $(".list li").length,
+       event_label: profile.userId,
+       transport_type: "beacon",
+       event_callback: function () { },
+      });
+      $("title").html("抽籤結果");
+      for (var i = 0; i < $(".list li").length; i++) {
+       lik += "[:;,aa]" + $(".list li").eq(i).text();
+       likjso += ',{"type": "text","text": "' + $(".list li").eq(i).text() + '","color": "#666666","size": "sm"}';
+      }
+      lik = lik.substring(7, lik.length);
+      lik = lik.split("[:;,aa]");
+      likjso = likjso.substring(1, likjso.length);
+      console.log(lik);
+      $(".rrd").fadeIn(222);
+      $("#result").text(lik[Math.floor(Math.random() * lik.length)]);
 
-     //liff.closeWindow();
+      liff
+       .sendMessages([
+        {
+         type: "flex",
 
-  })
+         altText: name + "已開始抽籤",
 
-  .catch((err) => {
+         contents: {
+          type: "bubble",
+          body: {
+           type: "box",
+           layout: "vertical",
+           contents: [
+            {
+             type: "text",
+             text: "抽籤",
+             weight: "bold",
+             size: "xl",
+            },
+            {
+             type: "box",
+             layout: "vertical",
+             margin: "lg",
+             spacing: "sm",
+             contents: [
+              {
+               type: "box",
+               layout: "baseline",
+               spacing: "sm",
+               contents: [
+                {
+                 type: "text",
+                 text: "建立者",
+                 color: "#aaaaaa",
+                 size: "sm",
+                 flex: 2,
+                },
+                {
+                 type: "text",
+                 text: name,
+                 wrap: true,
+                 color: "#666666",
+                 size: "sm",
+                 flex: 5,
+                },
+               ],
+              },
+              {
+               type: "box",
+               layout: "baseline",
+               spacing: "sm",
+               contents: [
+                {
+                 type: "text",
+                 text: "狀態",
+                 color: "#aaaaaa",
+                 size: "sm",
+                 flex: 2,
+                },
+                {
+                 type: "text",
+                 text: "抽籤中",
+                 wrap: true,
+                 color: "#666666",
+                 size: "sm",
+                 flex: 5,
+                },
+               ],
+              },
+              {
+               type: "box",
+               layout: "baseline",
+               spacing: "sm",
+               contents: [
+                {
+                 type: "text",
+                 color: "#aaaaaa",
+                 size: "sm",
+                 flex: 2,
+                 text: "建立時間",
+                },
+                {
+                 type: "text",
+                 text: dratime,
+                 wrap: true,
+                 color: "#666666",
+                 size: "sm",
+                 flex: 5,
+                },
+               ],
+              },
+              {
+               type: "box",
+               layout: "baseline",
+               spacing: "sm",
+               contents: [
+                {
+                 type: "text",
+                 text: "ID",
+                 color: "#aaaaaa",
+                 size: "sm",
+                 flex: 2,
+                },
+                {
+                 type: "text",
+                 text: loid,
+                 wrap: true,
+                 color: "#666666",
+                 size: "sm",
+                 flex: 5,
+                },
+               ],
+              },
+              {
+               type: "box",
+               layout: "vertical",
+               contents: [
+                {
+                 type: "text",
+                 text: "項目",
+                 size: "xl",
+                 weight: "bold",
+                },
+                {
+                 type: "box",
+                 layout: "vertical",
+                 contents: JSON.parse("[" + likjso + "]"),
+                },
+               ],
+              },
+             ],
+            },
+           ],
+          },
+         },
+        },
+       ])
 
-    console.log('error', err);
+       .then(() => {
+        console.log("message sent");
 
-     //liff.closeWindow();
+        //liff.closeWindow();
+       })
 
-  });
-   
-   
-   
-   
-});
+       .catch((err) => {
+        console.log("error", err);
+
+        //liff.closeWindow();
+       });
+     });
      //ghend
      //ghy
-     $('.next_2').click(function() {
-       gtag('event', 'Send_result', {
-    'event_category': 'Send_result',
-    'event_label':profile.userId,
-    'transport_type': 'beacon',
-    'event_callback': function(){
-   
-    
-     liff.sendMessages([
+     $(".next_2").click(function () {
+      gtag("event", "Send_result", {
+       event_category: "Send_result",
+       event_label: profile.userId,
+       transport_type: "beacon",
+       event_callback: function () {
+        liff
+         .sendMessages([
+          {
+           type: "flex",
 
-  {
+           altText: name + "的抽籤已結束",
 
-  "type": "flex",
-
-  "altText":name + "的抽籤已結束",
-
-  "contents": 
-
-     {
-  "type": "bubble",
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "text",
-        "text": "抽籤",
-        "weight": "bold",
-        "size": "xl"
-      },
-      {
-        "type": "box",
-        "layout": "vertical",
-        "margin": "lg",
-        "spacing": "sm",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
+           contents: {
+            type: "bubble",
+            body: {
+             type: "box",
+             layout: "vertical",
+             contents: [
               {
-                "type": "text",
-                "text": "建立者",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2
+               type: "text",
+               text: "抽籤",
+               weight: "bold",
+               size: "xl",
               },
               {
-                "type": "text",
-                "text": name,
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "狀態",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2
-              },
-              {
-                "type": "text",
-                "text": "已結束",
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2,
-                "text": "建立時間"
-              },
-              {
-                "type": "text",
-                "text": dratime,
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "text",
-                "text": "ID",
-                "color": "#aaaaaa",
-                "size": "sm",
-                "flex": 2
-              },
-              {
-                "type": "text",
-                "text": loid,
-                "wrap": true,
-                "color": "#666666",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "項目",
-                "size": "xl",
-                "weight": "bold"
-              },
-              {
-                "type": "box",
-                "layout": "vertical",
-                "contents": JSON.parse('[' + likjso + ']')
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "結果",
-                "size": "xl",
-                "weight": "bold"
-              },
-              {
-                "type": "box",
-                "layout": "vertical",
-                "contents": [
+               type: "box",
+               layout: "vertical",
+               margin: "lg",
+               spacing: "sm",
+               contents: [
+                {
+                 type: "box",
+                 layout: "baseline",
+                 spacing: "sm",
+                 contents: [
                   {
-                    "type": "text",
-                    "text": $('#result').text(),
-                    "color": "#666666",
-                    "size": "sm"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "footer": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "button",
-        "action": {
-          "type": "uri",
-          "label": "建立其他抽籤",
-          "uri": "https://line.me/R/app/1656214165-JPk2V1O2"
-        },
-        "color":"#6381d5"
-      }
-    ]
-  }
-}
-     
-}
-])
+                   type: "text",
+                   text: "建立者",
+                   color: "#aaaaaa",
+                   size: "sm",
+                   flex: 2,
+                  },
+                  {
+                   type: "text",
+                   text: name,
+                   wrap: true,
+                   color: "#666666",
+                   size: "sm",
+                   flex: 5,
+                  },
+                 ],
+                },
+                {
+                 type: "box",
+                 layout: "baseline",
+                 spacing: "sm",
+                 contents: [
+                  {
+                   type: "text",
+                   text: "狀態",
+                   color: "#aaaaaa",
+                   size: "sm",
+                   flex: 2,
+                  },
+                  {
+                   type: "text",
+                   text: "已結束",
+                   wrap: true,
+                   color: "#666666",
+                   size: "sm",
+                   flex: 5,
+                  },
+                 ],
+                },
+                {
+                 type: "box",
+                 layout: "baseline",
+                 spacing: "sm",
+                 contents: [
+                  {
+                   type: "text",
+                   color: "#aaaaaa",
+                   size: "sm",
+                   flex: 2,
+                   text: "建立時間",
+                  },
+                  {
+                   type: "text",
+                   text: dratime,
+                   wrap: true,
+                   color: "#666666",
+                   size: "sm",
+                   flex: 5,
+                  },
+                 ],
+                },
+                {
+                 type: "box",
+                 layout: "baseline",
+                 spacing: "sm",
+                 contents: [
+                  {
+                   type: "text",
+                   text: "ID",
+                   color: "#aaaaaa",
+                   size: "sm",
+                   flex: 2,
+                  },
+                  {
+                   type: "text",
+                   text: loid,
+                   wrap: true,
+                   color: "#666666",
+                   size: "sm",
+                   flex: 5,
+                  },
+                 ],
+                },
+                {
+                 type: "box",
+                 layout: "vertical",
+                 contents: [
+                  {
+                   type: "text",
+                   text: "項目",
+                   size: "xl",
+                   weight: "bold",
+                  },
+                  {
+                   type: "box",
+                   layout: "vertical",
+                   contents: JSON.parse("[" + likjso + "]"),
+                  },
+                 ],
+                },
+                {
+                 type: "box",
+                 layout: "vertical",
+                 contents: [
+                  {
+                   type: "text",
+                   text: "結果",
+                   size: "xl",
+                   weight: "bold",
+                  },
+                  {
+                   type: "box",
+                   layout: "vertical",
+                   contents: [
+                    {
+                     type: "text",
+                     text: $("#result").text(),
+                     color: "#666666",
+                     size: "sm",
+                    },
+                   ],
+                  },
+                 ],
+                },
+               ],
+              },
+             ],
+            },
+            footer: {
+             type: "box",
+             layout: "vertical",
+             contents: [
+              {
+               type: "button",
+               action: {
+                type: "uri",
+                label: "建立其他抽籤",
+                uri: "https://line.me/R/app/1656214165-JPk2V1O2",
+               },
+               color: "#6381d5",
+              },
+             ],
+            },
+           },
+          },
+         ])
 
-  .then(() => {
+         .then(() => {
+          console.log("message sent");
 
-    console.log('message sent');
+          liff.closeWindow();
+         })
 
-     liff.closeWindow();
+         .catch((err) => {
+          console.log("error", err);
 
-  })
-
-  .catch((err) => {
-
-    console.log('error', err);
-
-     //liff.closeWindow();
-
-  });
-      //ga
-        }
-  });
-       //gaend
+          //liff.closeWindow();
+         });
+        //ga
+       },
+      });
+      //gaend
      });
      //ghyend
-     
-     
-})
-.catch((err) => {
-  console.log('error', err);
+    })
+    .catch((err) => {
+     console.log("error", err);
      //liff.closeWindow();
-});
+    });
   })
   .catch((err) => {
-    // Error happens during initialization
-    console.log(err.code, err.message);
+   // Error happens during initialization
+   console.log(err.code, err.message);
    //liff.closeWindow();
   });
-   $(document).ready(function() {
-   
-      });
+ $(document).ready(function () { });
 </script>
 <script>
-   //const injectScript = () => {
-  //const script = document.createElement('script');
-  //script.src = "https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js";
-  //document.getElementsByTagName('head')[0].appendChild(script);
+//const injectScript = () => {
+//const script = document.createElement('script');
+//script.src = "https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js";
+//document.getElementsByTagName('head')[0].appendChild(script);
 
-  //setTimeout(() => {
-    // hacky way to wait for script load
-    //const script2 = document.createElement('script');
-    //script2.text = 'window.vConsole = new VConsole();';
-    //document.body.appendChild(script2);
-  //}, 1000);
-  
+//setTimeout(() => {
+// hacky way to wait for script load
+//const script2 = document.createElement('script');
+//script2.text = 'window.vConsole = new VConsole();';
+//document.body.appendChild(script2);
+//}, 1000);
+
 //};
-        //const result = injectScript();
-        
+//const result = injectScript();
 </script>
