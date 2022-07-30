@@ -878,10 +878,8 @@
                   },
                 },
                 ]
-                console.log(result_json)
-                console.log(JSON.stringify(result_json))
                 liff.sendMessages(result_json).then(() => {
-                  liff.closeWindow();
+                  //liff.closeWindow();
                 })
 
                   .catch((err) => {
