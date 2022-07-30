@@ -65,8 +65,8 @@
     }
 
     .list li .delete_btn svg {
-      width: 30px;
-      height: 30px;
+      width: 20px;
+      height: 20px;
     }
 
     .list li input[type="text"] {
@@ -260,7 +260,6 @@
 <div class="rrd">
   <h3>抽籤結果</h3>
   <h2 id="result">結果</h2>
-
   <div class="sendbar">
     <div class="sbtn next_2">傳送結果</div>
   </div>
@@ -279,6 +278,15 @@
       var genidchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
       var genid = "";
       for (var i = 0; i < 8; i++) {
+        var genrandomNumber = Math.floor(Math.random() * genidchars.length);
+        genid += genidchars.substring(genrandomNumber, genrandomNumber + 1);
+      }
+      return genid;
+    }
+    if (mode === "random2") {
+      var genidchars = "0123456789abcdefghijklmnopqrstuvwxyz"
+      var genid = "";
+      for (var i = 0; i < 32; i++) {
         var genrandomNumber = Math.floor(Math.random() * genidchars.length);
         genid += genidchars.substring(genrandomNumber, genrandomNumber + 1);
       }
@@ -324,23 +332,17 @@
           });
         }
       });
-
-      //getname
-
       liff
         .getProfile()
         .then((profile) => {
           const name = profile.displayName;
           var loid = genid("random");
-          //ga
           gtag("event", "logged_in", {
             event_category: "logged_in",
             event_label: profile.userId,
             transport_type: "beacon",
             event_callback: function () { },
           });
-
-          //ga-friend
           liff.getFriendship().then((data) => {
             if (data.friendFlag) {
               gtag("event", "friendFlag", {
@@ -358,34 +360,24 @@
               });
             }
           });
-          //ga-friendend
-          //gaos
           gtag("event", "User_OS", {
             event_category: liff.getOS(),
             event_label: profile.userId,
             transport_type: "beacon",
             event_callback: function () { },
           });
-          //gaosend
-          //galang
           gtag("event", "User_Lang", {
             event_category: liff.getLanguage(),
             event_label: profile.userId,
             transport_type: "beacon",
             event_callback: function () { },
           });
-          //galangend
-          //galinever
           gtag("event", "User_LINE_Ver", {
             event_category: liff.getLineVersion(),
             event_label: profile.userId,
             transport_type: "beacon",
             event_callback: function () { },
           });
-          //galineverend
-
-          //gaend
-          //share
           var dratime = "";
           var Today = new Date();
           $("#start").click(function () {
@@ -519,22 +511,16 @@
                   },
                 ])
                 .then(() => {
-                  //console.log("message sent");
-                  //liff.closeWindow();
                 })
                 .catch((err) => {
-                  //console.log("error", err);
-                  //liff.closeWindow();
                 });
             }
           });
-          //shend
-          //gh
           $(".addli").click(function () {
-            var list_id = 'l-' + genid('random')
+            var list_id = 'l-' + genid('random2')
             $(".list").append('<li id="' + list_id + '"><input type="text" placeholder="輸入文字"><div class="delete_btn">' + delete_icon + '</div></li>');
             $('.list li#' + list_id + ' .delete_btn').click(function (e) {
-              $('.list li#' + list_id).remove();
+            $('.list li#' + list_id).remove();
             });
           });
           var d_list = [];
@@ -548,8 +534,8 @@
             });
             $("title").html("抽籤結果");
             for (var i = 0; i < $(".list li").length; i++) {
-              d_list.push($(".list li input").eq(i).val())
-              d_list_json.push({ "type": "text", "text": $(".list li input").eq(i).val(), "color": "#666666", "size": "sm" })
+              d_list.push($('.list li input[type="text"]').eq(i).val())
+              d_list_json.push({ "type": "text", "text": $('.list li input[type="text"]').eq(i).val(), "color": "#666666", "size": "sm" })
             }
             $(".rrd").fadeIn(222);
             var result = d_list[Math.floor(Math.random() * d_list.length)]
@@ -831,7 +817,7 @@
                                     {
                                       type: "box",
                                       layout: "vertical",
-                                      contents: JSON.parse("[" + d_list_json + "]"),
+                                      contents: d_list_json,
                                     },
                                   ],
                                 },
@@ -883,32 +869,20 @@
                   ])
 
                   .then(() => {
-                    //console.log("message sent");
                     liff.closeWindow();
                   })
 
                   .catch((err) => {
-                    //console.log("error", err);
-                    //liff.closeWindow();
                   });
-                //ga
               },
             });
-            //gaend
           });
-          //ghyend
         })
         .catch((err) => {
-          //console.log("error", err);
-          //liff.closeWindow();
         });
     })
     .catch((err) => {
-      // Error happens during initialization
-      //console.log(err.code, err.message);
-      //liff.closeWindow();
     });
-  $(document).ready(function () { });
 </script>
 <script>
   /*
