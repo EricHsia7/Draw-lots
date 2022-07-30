@@ -24,6 +24,14 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
   <style>
+    :root {
+      --r-000000: #000;
+      --r-f4f4f4: #f4f4f4;
+      --r-e3e3e3: #e3e3e3;
+      --r-ffffff: #fff;
+      --r-888888: #888;
+    }
+
     * {
       outline: none;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -38,10 +46,11 @@
       display: flex;
       justify-content: left;
       align-items: center;
-      border-bottom: 1px rgba(170, 200, 193, 0.5) solid;
+      border-bottom: 1px var(--r-f4f4f4) solid;
       position: relative;
       color: rgba(170, 200, 193, 1);
       font-family: "Noto Sans TC", sans-serif;
+      box-sizing: border-box;
     }
 
     .list li .delete_btn {
@@ -55,6 +64,11 @@
       align-items: center;
       user-select: none;
       -webkit-user-select: none;
+    }
+
+    .list li .delete_btn svg {
+      width: 30px;
+      height: 30px;
     }
 
     .addli {
@@ -242,6 +256,7 @@
   if (liffu === "true") {
     $("h3").fadeOut(1);
   }
+  let delete_icon = '<svg stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 64 64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M4.92308 64L0 59.0769L27.0769 32L1.11786e-06 4.92308L4.92308-5.5893e-07L32 27.0769L59.0769-1.67679e-06L64 4.92307L36.9231 32L64 59.0769L59.0769 64L32 36.9231L4.92308 64Z" fill="var(--r-000000)" fill-rule="evenodd" opacity="1" stroke="none"/></svg>'
   function genid(mode) {
     if (mode === "random") {
       var genidchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
