@@ -276,6 +276,7 @@
   var getUrlString = location.href;
   var url = new URL(getUrlString);
   var liffu = url.searchParams.get("liff");
+  var result = ''
   if (liffu === "true") {
     $("h3").fadeOut(1);
   }
@@ -550,7 +551,7 @@
               })
             }
             $(".rrd").fadeIn(222);
-            var result = String(d_list[Math.floor(Math.random() * d_list.length)])
+            result = String(d_list[Math.floor(Math.random() * d_list.length)])
             $("#result").text(result)
             liff.sendMessages([
               {
