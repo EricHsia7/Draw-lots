@@ -72,8 +72,8 @@
     }
 
     .list li .delete_btn svg {
-      width: 20px;
-      height: 20px;
+      width: 17px;
+      height: 17px;
     }
 
     .list li input[type="text"] {
@@ -160,6 +160,7 @@
       background: var(--r-ffffff);
       overflow-y: scroll;
       overflow-x: hidden;
+      transition: 0.3s;
     }
 
     .rrd,
@@ -278,7 +279,7 @@
   var liffu = url.searchParams.get("liff");
   var result = ''
   if (liffu === "true") {
-    $("h3").fadeOut(1);
+    $("h3").css({'display':'none'})
   }
   let delete_icon = '<svg stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 64 64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M4.92308 64L0 59.0769L27.0769 32L1.11786e-06 4.92308L4.92308-5.5893e-07L32 27.0769L59.0769-1.67679e-06L64 4.92307L36.9231 32L64 59.0769L59.0769 64L32 36.9231L4.92308 64Z" fill="var(--r-000000)" fill-rule="evenodd" opacity="1" stroke="none"/></svg>'
   function genid(mode) {
@@ -393,7 +394,7 @@
               Today = new Date();
               dratime = Today.getFullYear() + "." + (Today.getMonth() + 1) + "." + Today.getDate() + " " + Today.getHours() + ":" + Today.getMinutes();
               $("title").html("建立抽籤");
-              $(".ddr").fadeIn(222);
+              $(".ddr").css({'display':'block','opacity':'1'})
               gtag("event", "create", {
                 event_category: "create",
                 event_label: profile.userId,
@@ -550,7 +551,7 @@
                 size: 'sm'
               })
             }
-            $(".rrd").fadeIn(222);
+            $(".rrd").css({'display':'block','opacity':'1'})
             result = String(d_list[Math.floor(Math.random() * d_list.length)])
             $("#result").text(result)
             liff.sendMessages([
@@ -879,7 +880,7 @@
                 },
                 ]
                 liff.sendMessages(result_json).then(() => {
-                  //liff.closeWindow();
+                  liff.closeWindow();
                 })
 
                   .catch((err) => {
