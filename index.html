@@ -542,7 +542,11 @@
             $("title").html("抽籤結果");
             for (var i = 0; i < $(".list li").length; i++) {
               d_list.push($('.list li input[type="text"]').eq(i).val())
-              d_list_json.push({ "type": "text", "text": $('.list li input[type="text"]').eq(i).val(), "color": "#666666", "size": "sm" })
+              d_list_json.push({
+                'type': 'text',
+                'text': String($('.list li input[type="text"]').eq(i).val()),
+                'color': '#666666', 'size': 'sm'
+              })
             }
             $(".rrd").fadeIn(222);
             var result = d_list[Math.floor(Math.random() * d_list.length)]
