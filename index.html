@@ -21,8 +21,6 @@
   <link rel="manifest" href="manifest.json" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-
   <style>
     :root {
       --r-000000: #000;
@@ -78,7 +76,7 @@
       justify-content: center;
       align-items: center;
       margin-bottom: 100px;
-      color: rgba(170, 200, 193, 1);
+      color: var(--r-000000);
       font-family: "Noto Sans TC", sans-serif;
       font-weight: 700;
       -webkit-user-select: none;
@@ -101,7 +99,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: row;
-      border-top: 1px rgba(170, 200, 193, 0.5) solid;
+      border-top: 1px var(--r-f4f4f4) solid;
     }
 
     .sbtn {
@@ -109,8 +107,8 @@
       max-width: 350px;
       height: 45px;
       border-radius: 12px;
-      background: #aac8c1;
-      color: #fff;
+      background: var(--r-e3e3e3);
+      color: var(--r-000000);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -133,7 +131,7 @@
       width: calc(100% - 10px);
       padding: 5px;
       height: 100%;
-      background: #fff;
+      background: var(--r-ffffff);
       overflow-y: scroll;
       overflow-x: hidden;
     }
@@ -164,7 +162,7 @@
     }
 
     .fgt p {
-      color: #aac8c1;
+      color: var(--r-888888);
       -webkit-user-select: none;
       user-select: none;
       font-family: "Noto Sans TC", sans-serif;
@@ -177,7 +175,7 @@
       transform: translate(-50%, -50%);
       font-family: "Noto Sans TC", sans-serif;
       font-weight: 700;
-      color: #aac8c1;
+      color: var(--r-000000);
       -webkit-user-select: none;
       user-select: none;
     }
@@ -188,7 +186,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #aac8c1;
+      color: var(--r-888888);
       -webkit-user-select: none;
       user-select: none;
     }
@@ -234,7 +232,7 @@
   <h3>建立抽籤</h3>
   <div class="list">
   </div>
-  <div class="addli"><i class="fas fa-plus"></i>新增項目</div>
+  <div class="addli">新增項目</div>
   <div class="sendbar">
     <div class="sbtn next_1">開始抽籤</div>
   </div>
