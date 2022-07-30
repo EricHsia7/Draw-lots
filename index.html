@@ -31,10 +31,12 @@
   <style>
     :root {
       --r-000000: #1a90ff;
+      --r-000000-rgba:rgba(26, 144, 255,0.3);
       --r-f4f4f4: #ebf5ff;
       --r-e3e3e3: #4daaff;
       --r-ffffff: #fff;
       --r-888888: #004f99;
+      --r-text-color:#fff;
     }
 
     * {
@@ -92,6 +94,9 @@
       caret-color: var(--r-000000);
       color: var(--r-000000)
     }
+    .list li input[type="text"]::placeholder {
+      color:var(--r-000000-rgba);
+    }
 
     .addli {
       width: 100%;
@@ -139,7 +144,7 @@
       height: 45px;
       border-radius: 12px;
       background: var(--r-e3e3e3);
-      color: var(--r-000000);
+      color: var(--r-text-color);
       display: flex;
       justify-content: center;
       align-items: center;
