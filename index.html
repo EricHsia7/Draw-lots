@@ -560,7 +560,7 @@
             for (var i = 0; i < $(".list li").length; i++) {
               var this_list_text = $('.list li input[type="text"]').eq(i).val()
               if (this_list_text === null || this_list_text === undefined || this_list_text === '') {
-                this_list_text = '--'
+                continue;
               }
               d_list.push(this_list_text)
               d_list_json.push({
