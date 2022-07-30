@@ -705,116 +705,141 @@
               event_label: profile.userId,
               transport_type: "beacon",
               event_callback: function () {
-                liff
-                  .sendMessages([
-                    {
-                      type: "flex",
-                      altText: name + "的抽籤已結束",
-                      contents: {
-                        type: "bubble",
-                        body: {
+                var result_json = [{
+                  type: "flex",
+                  altText: name + "的抽籤已結束",
+                  contents: {
+                    type: "bubble",
+                    body: {
+                      type: "box",
+                      layout: "vertical",
+                      contents: [
+                        {
+                          type: "text",
+                          text: "抽籤",
+                          weight: "bold",
+                          size: "xl",
+                        },
+                        {
                           type: "box",
                           layout: "vertical",
+                          margin: "lg",
+                          spacing: "sm",
                           contents: [
                             {
-                              type: "text",
-                              text: "抽籤",
-                              weight: "bold",
-                              size: "xl",
+                              type: "box",
+                              layout: "baseline",
+                              spacing: "sm",
+                              contents: [
+                                {
+                                  type: "text",
+                                  text: "建立者",
+                                  color: "#aaaaaa",
+                                  size: "sm",
+                                  flex: 2,
+                                },
+                                {
+                                  type: "text",
+                                  text: name,
+                                  wrap: true,
+                                  color: "#666666",
+                                  size: "sm",
+                                  flex: 5,
+                                },
+                              ],
+                            },
+                            {
+                              type: "box",
+                              layout: "baseline",
+                              spacing: "sm",
+                              contents: [
+                                {
+                                  type: "text",
+                                  text: "狀態",
+                                  color: "#aaaaaa",
+                                  size: "sm",
+                                  flex: 2,
+                                },
+                                {
+                                  type: "text",
+                                  text: "已結束",
+                                  wrap: true,
+                                  color: "#666666",
+                                  size: "sm",
+                                  flex: 5,
+                                },
+                              ],
+                            },
+                            {
+                              type: "box",
+                              layout: "baseline",
+                              spacing: "sm",
+                              contents: [
+                                {
+                                  type: "text",
+                                  color: "#aaaaaa",
+                                  size: "sm",
+                                  flex: 2,
+                                  text: "建立時間",
+                                },
+                                {
+                                  type: "text",
+                                  text: dratime,
+                                  wrap: true,
+                                  color: "#666666",
+                                  size: "sm",
+                                  flex: 5,
+                                },
+                              ],
+                            },
+                            {
+                              type: "box",
+                              layout: "baseline",
+                              spacing: "sm",
+                              contents: [
+                                {
+                                  type: "text",
+                                  text: "ID",
+                                  color: "#aaaaaa",
+                                  size: "sm",
+                                  flex: 2,
+                                },
+                                {
+                                  type: "text",
+                                  text: loid,
+                                  wrap: true,
+                                  color: "#666666",
+                                  size: "sm",
+                                  flex: 5,
+                                },
+                              ],
                             },
                             {
                               type: "box",
                               layout: "vertical",
-                              margin: "lg",
-                              spacing: "sm",
                               contents: [
                                 {
-                                  type: "box",
-                                  layout: "baseline",
-                                  spacing: "sm",
-                                  contents: [
-                                    {
-                                      type: "text",
-                                      text: "建立者",
-                                      color: "#aaaaaa",
-                                      size: "sm",
-                                      flex: 2,
-                                    },
-                                    {
-                                      type: "text",
-                                      text: name,
-                                      wrap: true,
-                                      color: "#666666",
-                                      size: "sm",
-                                      flex: 5,
-                                    },
-                                  ],
+                                  type: "text",
+                                  text: "項目",
+                                  size: "xl",
+                                  weight: "bold",
                                 },
                                 {
                                   type: "box",
-                                  layout: "baseline",
-                                  spacing: "sm",
-                                  contents: [
-                                    {
-                                      type: "text",
-                                      text: "狀態",
-                                      color: "#aaaaaa",
-                                      size: "sm",
-                                      flex: 2,
-                                    },
-                                    {
-                                      type: "text",
-                                      text: "已結束",
-                                      wrap: true,
-                                      color: "#666666",
-                                      size: "sm",
-                                      flex: 5,
-                                    },
-                                  ],
+                                  layout: "vertical",
+                                  contents: d_list_json,
                                 },
+                              ],
+                            },
+                            {
+                              type: "box",
+                              layout: "vertical",
+                              contents: [
                                 {
-                                  type: "box",
-                                  layout: "baseline",
-                                  spacing: "sm",
-                                  contents: [
-                                    {
-                                      type: "text",
-                                      color: "#aaaaaa",
-                                      size: "sm",
-                                      flex: 2,
-                                      text: "建立時間",
-                                    },
-                                    {
-                                      type: "text",
-                                      text: dratime,
-                                      wrap: true,
-                                      color: "#666666",
-                                      size: "sm",
-                                      flex: 5,
-                                    },
-                                  ],
-                                },
-                                {
-                                  type: "box",
-                                  layout: "baseline",
-                                  spacing: "sm",
-                                  contents: [
-                                    {
-                                      type: "text",
-                                      text: "ID",
-                                      color: "#aaaaaa",
-                                      size: "sm",
-                                      flex: 2,
-                                    },
-                                    {
-                                      type: "text",
-                                      text: loid,
-                                      wrap: true,
-                                      color: "#666666",
-                                      size: "sm",
-                                      flex: 5,
-                                    },
-                                  ],
+                                  type: "text",
+                                  text: "結果",
+                                  size: "xl",
+                                  weight: "bold",
                                 },
                                 {
                                   type: "box",
@@ -822,38 +847,9 @@
                                   contents: [
                                     {
                                       type: "text",
-                                      text: "項目",
-                                      size: "xl",
-                                      weight: "bold",
-                                    },
-                                    {
-                                      type: "box",
-                                      layout: "vertical",
-                                      contents: d_list_json,
-                                    },
-                                  ],
-                                },
-                                {
-                                  type: "box",
-                                  layout: "vertical",
-                                  contents: [
-                                    {
-                                      type: "text",
-                                      text: "結果",
-                                      size: "xl",
-                                      weight: "bold",
-                                    },
-                                    {
-                                      type: "box",
-                                      layout: "vertical",
-                                      contents: [
-                                        {
-                                          type: "text",
-                                          text: result,
-                                          color: "#666666",
-                                          size: "sm",
-                                        },
-                                      ],
+                                      text: result,
+                                      color: "#666666",
+                                      size: "sm",
                                     },
                                   ],
                                 },
@@ -861,28 +857,31 @@
                             },
                           ],
                         },
-                        footer: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
-                            {
-                              type: "button",
-                              action: {
-                                type: "uri",
-                                label: "建立其他抽籤",
-                                uri: "https://line.me/R/app/1656214165-JPk2V1O2",
-                              },
-                              color: "#6381d5",
-                            },
-                          ],
-                        },
-                      },
+                      ],
                     },
-                  ])
-
-                  .then(() => {
-                    liff.closeWindow();
-                  })
+                    footer: {
+                      type: "box",
+                      layout: "vertical",
+                      contents: [
+                        {
+                          type: "button",
+                          action: {
+                            type: "uri",
+                            label: "建立其他抽籤",
+                            uri: "https://line.me/R/app/1656214165-JPk2V1O2",
+                          },
+                          color: "#6381d5",
+                        },
+                      ],
+                    },
+                  },
+                },
+                ]
+                console.log(result_json)
+                console.log(JSON.stringify(result_json))
+                liff.sendMessages(result_json).then(() => {
+                  liff.closeWindow();
+                })
 
                   .catch((err) => {
                   });
