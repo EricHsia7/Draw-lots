@@ -543,9 +543,10 @@
             for (var i = 0; i < $(".list li").length; i++) {
               d_list.push($('.list li input[type="text"]').eq(i).val())
               d_list_json.push({
-                'type': 'text',
-                'text': String($('.list li input[type="text"]').eq(i).val()),
-                'color': '#666666', 'size': 'sm'
+                type: 'text',
+                text: String($('.list li input[type="text"]').eq(i).val()),
+                color: '#666666',
+                size: 'sm'
               })
             }
             $(".rrd").fadeIn(222);
