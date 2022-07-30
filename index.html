@@ -550,7 +550,7 @@
               })
             }
             $(".rrd").fadeIn(222);
-            var result = d_list[Math.floor(Math.random() * d_list.length)]
+            var result = String(d_list[Math.floor(Math.random() * d_list.length)])
             $("#result").text(result)
             liff.sendMessages([
               {
