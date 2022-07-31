@@ -548,6 +548,7 @@
           $(".addli").click(function () {
             var list_id = 'l-' + genid('random2')
             $(".list").append('<li id="' + list_id + '"><input type="text" placeholder="輸入文字"><div class="delete_btn">' + delete_icon + '</div></li>');
+            $('.list li#' + list_id + ' input').focus()
             $('.list li#' + list_id + ' .delete_btn').click(function (e) {
               $('.list li#' + list_id).remove();
             });
